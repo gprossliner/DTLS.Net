@@ -61,6 +61,8 @@ namespace DTLS
             return result;
         }      
 
+        /* GPR unused
+
 		public static byte[] CalculateMasterSecret(byte[] preMasterSecret, IKeyExchange keyExchange)
 		{
 			byte[] result;
@@ -92,6 +94,8 @@ namespace DTLS
 			}
 			return result;
 		}
+
+    */
 
 		private static int GetEncryptionAlgorithm(TCipherSuite cipherSuite)
 		{
@@ -171,8 +175,7 @@ namespace DTLS
                     break;
             }
             DTLSContext context = new DTLSContext(client, version, handshakeInfo);
-            Org.BouncyCastle.Crypto.Prng.CryptoApiRandomGenerator randomGenerator = new Org.BouncyCastle.Crypto.Prng.CryptoApiRandomGenerator();
-            context.SecureRandom = new Org.BouncyCastle.Security.SecureRandom(randomGenerator);
+            context.SecureRandom = Porthelp.CreateSecureRandom();
 
             signer.Init(context);
             if (TlsUtilities.IsTlsV12(context))

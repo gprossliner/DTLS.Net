@@ -64,8 +64,7 @@ namespace DTLS
 		{
             TimeSpan unixTime = DateTime.UtcNow.Subtract(TLSUtils.UnixEpoch);
 			_UnixTime = (uint)unixTime.TotalSeconds;
-			RNGCryptoServiceProvider random = new RNGCryptoServiceProvider();
-			random.GetBytes(_RandomBytes);
+            Porthelp.CreateSecureRandom().NextBytes(_RandomBytes);
 		}
 
 		public byte[] Serialise()

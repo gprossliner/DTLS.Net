@@ -413,19 +413,8 @@ namespace DTLS
                
 		private Socket SetupSocket(AddressFamily addressFamily)
 		{
-			Socket result = new Socket(addressFamily, SocketType.Dgram, ProtocolType.Udp);
-            if (addressFamily == AddressFamily.InterNetworkV6)
-            {
-                result.SetSocketOption(SocketOptionLevel.IPv6, SocketOptionName.IPv6Only, true);
-            }
-            if (Environment.OSVersion.Platform != PlatformID.Unix)
-            {
-                // Do not throw SocketError.ConnectionReset by ignoring ICMP Port Unreachable
-                const Int32 SIO_UDP_CONNRESET = -1744830452;
-                result.IOControl(SIO_UDP_CONNRESET, new Byte[] { 0 }, null);
-            }
-			return result;
-		}
+            return Porthelp.SetupSocket(addressFamily);
+        }
 
         public void Send(EndPoint remoteEndPoint, byte[] data)
         {

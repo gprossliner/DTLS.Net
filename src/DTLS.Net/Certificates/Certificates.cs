@@ -156,8 +156,7 @@ namespace DTLS
             if (privateKey != null)
             {
 
-                CryptoApiRandomGenerator randomGenerator = new CryptoApiRandomGenerator();
-                SecureRandom random = new SecureRandom(randomGenerator);
+                SecureRandom random = Porthelp.CreateSecureRandom();
                 X509V3CertificateGenerator certificateGenerator = new X509V3CertificateGenerator();
                 AddStandardCertificateInfo(certificateGenerator, random, subject, issuer.Subject, startDate, expiryDate);
                 AsymmetricCipherKeyPair subjectKeyPair = GenerateKeys(certificateGenerator, random, signatureAlgorithm);
@@ -193,8 +192,7 @@ namespace DTLS
             AsymmetricKeyParameter privateKey = issuer.PrivateKey as AsymmetricKeyParameter;
             if (privateKey != null)
             {
-                CryptoApiRandomGenerator randomGenerator = new CryptoApiRandomGenerator();
-                SecureRandom random = new SecureRandom(randomGenerator);
+                SecureRandom random = Porthelp.CreateSecureRandom();
                 X509V3CertificateGenerator certificateGenerator = new X509V3CertificateGenerator();
                 AddStandardCertificateInfo(certificateGenerator, random, subject, issuer.Subject, startDate, expiryDate);
                 AsymmetricCipherKeyPair subjectKeyPair = GenerateKeys(certificateGenerator, random, signatureAlgorithm);
@@ -220,8 +218,7 @@ namespace DTLS
         {
             byte[] result = null;
 
-            CryptoApiRandomGenerator randomGenerator = new CryptoApiRandomGenerator();
-            SecureRandom random = new SecureRandom(randomGenerator);
+            SecureRandom random = Porthelp.CreateSecureRandom();
             X509V3CertificateGenerator certificateGenerator = new X509V3CertificateGenerator();
             AddStandardCertificateInfo(certificateGenerator, random, subject, subject, startDate, expiryDate);
             AsymmetricCipherKeyPair subjectKeyPair = GenerateKeys(certificateGenerator, random, signatureAlgorithm);
